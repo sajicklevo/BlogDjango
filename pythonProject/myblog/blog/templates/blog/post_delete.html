@@ -1,0 +1,11 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h1>Удалить пост</h1>
+    <p>Вы уверены, что хотите удалить пост "{{ post.title }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="post_id" value="{{ post.pk }}">
+        <button type="submit">Удалить</button>
+    </form>
+{% endblock %}

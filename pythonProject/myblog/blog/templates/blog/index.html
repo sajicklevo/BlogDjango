@@ -1,0 +1,40 @@
+{% extends 'blog/base.html' %}
+
+
+
+{% block content %}
+    <h1>Список постов</h1>
+    <a href="{% url 'post_createview' %}">Создать новый пост</a>
+
+    {% if posts %}
+        <ul>
+            {% for post in posts %}
+                <li>
+                    <a href="{% url 'postview' post.pk %}">{{post.title}}. Краткая аннотация: {{post.content}}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Постов пока нет.</p>
+    {% endif %}
+
+    {% if is_paginated %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if posts.has_previous %}
+                <a href="?page=1">&laquo; первая</a>
+                <a href="?page={{ posts.previous_page_number }}">предыдущая</a>
+            {% endif %}
+
+            <span class="current">
+                Страница {{ posts.number }} из {{ posts.paginator.num_pages }}.
+            </span>
+
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}">следующая</a>
+                <a href="?page={{ posts.paginator.num_pages }}">последняя &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}
+{% endblock %}

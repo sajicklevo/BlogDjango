@@ -1,0 +1,11 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h1>{{ result.title }}</h1>
+    <p>{{ result.text }}</p>
+    <p>Опубликовано: {{ result.published_date }}</p>
+
+        <a href="{% url 'post_updateview' result.pk %}">Редактировать</a>
+        <a href="{% url 'post_deleteview' result.pk %}">Удалить</a>
+
+{% endblock %}
